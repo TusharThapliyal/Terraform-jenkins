@@ -24,13 +24,16 @@ terraform apply -auto-approve
 ## Description
 After running the above commands you will have :
 
+Network layer
 1. one VPC (10.0.0.0/16)
 2. two public subnet(10.0.1.0/24, 10.0.2.0/24)
 3. one internet gateway connected to the VPC and a route table for subnets to allows traffic through IGW
 4. two security groups. one with just ssh, and one with http, https, custom tcp at port 8080.
-5. one ec2 instance with user data to install java, Jenkins, terraform on it.
-6. one target group 
-7. one ALB(internal).
+   
+Application Layer
+1. one ec2 instance with user data to install java, Jenkins, terraform on it.
+2. one target group 
+3. one ALB(internal).
 
 ## security measures
 1. Dont allow direct http traffic to ec2 instance. Only allow http traffic coming from ALB. Use security groups to do that.
@@ -38,7 +41,7 @@ After running the above commands you will have :
 
 ## Note
 - make modification in the ***terraform.tfvars*** file according to your needs.
-- generate your own ssh key (key-gen) and put the public key (example.pub) in terraform.tfvars .
+- generate your own ssh key (using 'ssh keygen') and put the public key (example.pub) in terraform.tfvars .
 - it is recommended to increase the instance size from ***t2.micro*** to atleast ***t2.medium*** to work properly with Jenkins .
 - change the ***share_credential_file*** in ***provider.tf*** .
 
