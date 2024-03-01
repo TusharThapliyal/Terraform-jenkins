@@ -11,9 +11,6 @@ variable "Public_subnet_cidr" {
 variable "Availability_zone" {
   type = list(string)
 }
-variable "Ami" {
-  type = string
-}
 variable "Instance" {
   type = string
 }
@@ -21,9 +18,6 @@ variable "Public_ip_boolean" {
   type = bool
 }
 variable "Tag_name" {
-  type = string
-}
-variable "Public_Key" {
   type = string
 }
 variable "Name" {

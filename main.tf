@@ -15,13 +15,12 @@ module "jenkins" {
   Tag_name                  = var.Tag_name
   Sg                        = module.securityGroup.Sg
   Sg_ssh                    = module.securityGroup.Sg_ssh
-  Ami                       = var.Ami
+  Ami_id                    = module.ami.Ami_id
   Instance                  = var.Instance
   Subnet_id                 = module.network.Subnet_id
   Security_group            = [module.securityGroup.Sg, module.securityGroup.Sg_ssh]
   Public_ip_boolean         = var.Public_ip_boolean
-  User_data_install_jenkins = templatefile("./jenkins_runner_script/jenkins_installer.sh", {})
-  Public_Key                = var.Public_Key
+  User_data_install_jenkins = file("./jenkins_runner_script/jenkins_installer.sh")
 }
 module "targetGroup" {
   source     = "./targetGroup"
@@ -47,4 +46,7 @@ module "loadBalancer" {
   Lb_listner_default_action       = "forward"
   Ec2_instance_id                 = module.jenkins.Jenkins_instance_id
   Lb_target_group_attachment_port = 80
+}
+module "ami" {
+  source = "./ami"
 }
