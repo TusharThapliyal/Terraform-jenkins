@@ -45,6 +45,13 @@ Application Layer
 - it is recommended to increase the instance size from ***t2.micro*** to atleast ***t2.medium*** to work properly with Jenkins .
 - change the ***share_credential_file*** in ***provider.tf*** .
 
+## Access/Secret key generation
+```bash
+ssh-keygen
+```
+use this command in your terminal and give any relevent name to you key.\
+By running this command, you will have two keys in your ``.ssh/`` .\
+``exampleKey.pub`` and ``exampleKey`` . the one with ``.pub`` extension is our public key and we need to use that in our terraform code. and other one will be used as a private key. Which will be spicified in resource block "aws_instance".
 
 ## Contributing
 
